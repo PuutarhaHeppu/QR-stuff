@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mongodb": "^6.19.0",
+    "square": "^37.1.0",
+    "stripe": "^18.5.0",
+    "uuid": "^12.0.0"
+  }
+}
