@@ -115,7 +115,7 @@ app.post('/api/order/new/:tableNumber/pay', async (req, res) => {
         quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: `${process.env.URL}/order/success.html?${order.id}`,
+      success_url: `${process.env.URL}/order/success.html`,
       cancel_url: `${process.env.URL}/order/cancel.html`,
     })
 
@@ -127,13 +127,13 @@ app.post('/api/order/new/:tableNumber/pay', async (req, res) => {
 })
 
 //when user is directed here mark the order as paid in the db
-app.get(`/order/success.html?${order.id}`, async (req, _) => {
-  const orderId = req.query.orderId
+app.get('/order/success.html', async (req, res) => {
+  const { orderId } = req.query
   await db.collection('TableOrdersDone').insertOne(
-    { orderId },
-    { $set: { paid: true } }
+    { orderId, paid: true }
   )
   await db.collection('TableOrders').deleteOne({ orderId })
+  res.send('Payment successful!')
 })
 
 app.get('/order/cancel.html', (req, res) => {

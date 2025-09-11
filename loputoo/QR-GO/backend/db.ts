@@ -9,13 +9,13 @@ export async function connectToMongo() {
     await client.connect()
     db = client.db()
     console.log('Connected to MongoDB')
-  } catch (err) {
-    console.error('MongoDB connection error:', err)
+  } catch (error) {
+    console.error('MongoDB connection error:', error)
     process.exit(1)
   }
 }
 
 export function getDb() {
-  if (!db) throw new Error('DB not connected. Call connectToMongo() first.')
+  if (!db) throw new Error('DB not connected. Call connectToMongo()')
   return db
 }
